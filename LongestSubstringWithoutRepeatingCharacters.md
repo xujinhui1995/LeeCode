@@ -17,4 +17,45 @@
 
 ![](https://i.imgur.com/oqfyOvU.png)
 
+还有一个问题,如果字符c的位加一小于左边标志位,那么,也应该加上.
+
 接下来就是实现了.但是我觉得现在java的劣势又开始体现了.
+
+	import java.util.*;
+	class Solution {
+	    public int lengthOfLongestSubstring(String s) {
+	        int leftIndex = 0;
+	        int longest = 0;
+	        int length = s.length();
+	        Map<Character,Integer> m = new HashMap<Character,Integer>();
+	        for(int i=0; i<length; i++){
+	            char c = s.charAt(i);
+	            if(!m.containsKey(c) || m.get(c)<leftIndex){
+	                longest = ((i-leftIndex+1)>longest?(i-leftIndex+1):longest);
+	            }else{
+	                leftIndex = m.get(c);
+	            }
+	            m.put(c,i+1);
+	        }
+	        return longest;
+	    }
+	}
+
+也是非常的坎坷了,但是Python的实现应该就会简单很多.
+
+	class Solution:
+	    def lengthOfLongestSubstring(self, s):
+	        """
+	        :type s: str
+	        :rtype: int
+	        """
+	        longest = 0
+	        leftIndex = 0
+	        term = {}
+	        for index, each in enumerate(s):
+	            if each not in term or term[each]<leftIndex:
+	                longest = max(index-leftIndex+1,longest)
+	            else:
+	                leftIndex = term[each]
+	            term[each] = index+1
+	        return longest
