@@ -54,3 +54,58 @@ Implement atoi to convert a string to an integer.
 	}
 
 基本逻辑是比较清晰的，就是有过多的判断。
+
+更新：
+
+	class Solution {
+	    public int myAtoi(String str){
+	        str = str.trim();
+	        int size = str.length();
+	        boolean flag = false;
+	        int result = 0;
+	        int i = 0;
+	 
+	        if(str.charAt(0)=='-'){
+	            i++;
+	            flag = true;
+	        }
+	        if(str.charAt(0)=='+'){
+	            i++;
+	        }
+	        while(i<size && str.charAt(i)>='0' && str.charAt(i)<='9'){
+	            if(result > Integer.MAX_VALUE/10 || (result==Integer.MAX_VALUE/10 && str.charAt(i)>'7')){
+	                if(flag){
+	                    return Integer.MIN_VALUE;
+	                }else{
+	                    return Integer.MAX_VALUE;
+	                }      
+	            }
+	            result = result*10 + str.charAt(i++)-'0';
+	        }
+	        if(flag){
+	            result = -1*result;
+	        }
+	             
+	        return result; 
+	    }
+	}
+
+简化流程
+
+刷新认知的python：
+
+	class Solution:
+	    def myAtoi(self, str):
+	        """
+	        :type str: str
+	        :rtype: int
+	        """
+	        if len(str)==0: return 0
+	        ls = list(str.strip())
+	        flag = -1 if ls[0]=='-' else 1
+	        if ls[0] in ['-','+']: del ls[0]
+	        result, i = 0, 0
+	        while i < len(ls) and ls[i].isdigit():
+	            result = result*10 + ord(ls[i]) - ord('0')
+	            i += 1
+	        return max(-2**31, min(flag*result, 2**31-1))
