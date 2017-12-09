@@ -39,3 +39,13 @@ Determine whether an integer is a palindrome. Do this without extra space.
 只需要比较一半。
 
 已经不敢想象如果python更简单会是什么样子了。
+
+	if x<0 or (x>0 and x%10==0):
+        return False
+    result, tail = 0, 0
+    while x>result:
+        result = result*10 + x%10
+        x = x // 10
+    return x==result or x==result//10
+
+其实也就这样。
