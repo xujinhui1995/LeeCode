@@ -38,3 +38,5 @@ Implement regular expression matching with support for '.' and '*'.
 	        return res[n];
 	    }
 	}
+
+所谓奇淫技巧，这里体现的就是边界的处理。非常干净利落。
