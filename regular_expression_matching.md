@@ -141,3 +141,29 @@ Implement regular expression matching with support for '.' and '*'.
 		
 		- 第一行主要体现的是首次内部循环，pre也即`res[i-1][j-1]==res[0][0];`也就是`res[0]`。
 		- 第二行则主要是`n>1`后，`res[0][j-1]=false`。接下来就是一次次循环，一次次覆盖，最终得到res[n]，也就是结果。
+
+
+
+python：
+
+	class Solution:
+	    def isMatch(self, s, p):
+	        """
+	        :type s: str
+	        :type p: str
+	        :rtype: bool
+	        """
+	        m, n = len(s) + 1, len(p) + 1
+	        table = [[False]*n for _ in range(m)]
+	        table[0][0] = True
+	        for i,element in enumerate(p[1:],2):
+	            table[0][i] = table[0][i-2] and element == '*'
+	        for i, ss in enumerate(s,1):
+	            for j, pp in enumerate(p,1):
+	                if pp != '*':
+	                    table[i][j] = table[i-1][j-1] and (ss == pp or pp == '.')
+	                else:
+	                    table[i][j] |= table[i][j-2]
+	                    if ss==p[j-2] or p[j-2] == '.':
+	                        table[i][j] |= table[i-1][j]
+	        return table[-1][-1]
