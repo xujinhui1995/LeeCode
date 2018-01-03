@@ -32,3 +32,18 @@ Input is guaranteed to be within the range from 1 to 3999.
 	        return num;
 	    }
 	}
+
+思想都是一样的:
+
+
+	class Solution(object):
+	    def maxArea(self, s):
+	    '''
+	    trpe s: string
+	    rType: int
+	    '''
+	    map = {'I':1, 'X':10, 'C':100, 'M':1000, 'V':5, 'L':50, 'D':500}
+	    num, pre = 0, 1000
+	    for i in [map[j] for j in s]:
+	        num, pre =  num + i - 2*pre if i > pre else num + i, i
+	    return num
