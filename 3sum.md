@@ -90,7 +90,7 @@ Note: The solution set must not contain duplicate triplets.
 	    }
 	}
 
-#### Java Disscussion Solution 1
+#### Java Discussion Solution 1
 
 	import java.util.*;
 	class Solution {

@@ -53,7 +53,7 @@ Write a function to find the longest common prefix string amongst an array of st
 	    }
 	}
 
-#### Disscussion Solution 1(useing array sort)
+#### Discussion Solution 1(useing array sort)
 
 	class Solution {
 	    public String longestCommonPrefix(String[] strs) {
@@ -77,7 +77,7 @@ Write a function to find the longest common prefix string amongst an array of st
 	}
 
 
-#### Disscussion Solution 2
+#### Discussion Solution 2
 
 	class Solution {
 	    public String longestCommonPrefix(String[] strs) {
@@ -96,7 +96,7 @@ Write a function to find the longest common prefix string amongst an array of st
 	    }
 	}
 
-#### python Disscussion Solution1:
+#### python Discussion Solution1:
 
 	class Solution:
 	    def longestCommonPrefix(self, strs):
@@ -113,7 +113,7 @@ Write a function to find the longest common prefix string amongst an array of st
 	                    return shortest[:i]
 	        return shortest
 
-#### python Disscussion Solution2:
+#### python Discussion Solution2:
 
 	class Solution:
 	    def longestCommonPrefix(self, strs):
