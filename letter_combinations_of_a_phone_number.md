@@ -55,3 +55,53 @@ A mapping of digit to letters(just like on the telephone buttons) is given below
 	        return list;
 	    }
 	}
+
+#### python1：
+
+	class Solution:
+	    def letterCombinations(self, digits):
+	        """
+	        :type digits: str
+	        :rtype: List[str]
+	        """
+	        if '' == digits: return []
+	        kvmaps = {
+	            '2': 'abc',
+	            '3': 'def',
+	            '4': 'ghi',
+	            '5': 'jkl',
+	            '6': 'mno',
+	            '7': 'pqrs',
+	            '8': 'tuv',
+	            '9': 'wxyz'
+	        }
+	        res = ['']
+	        for c in digits:
+	            tmp = []
+	            for y in res:
+	                for x in kvmaps[c]:
+	                    tmp.append(y+x)
+	            res = tmp
+	        return res
+
+#### python2：
+
+	from functools import reduce
+	class Solution:
+	    def letterCombinations(self, digits):
+	        """
+	        :type digits: str
+	        :rtype: List[str]
+	        """
+	        if '' == digits: return []
+	        kvmaps = {
+	            '2': 'abc',
+	            '3': 'def',
+	            '4': 'ghi',
+	            '5': 'jkl',
+	            '6': 'mno',
+	            '7': 'pqrs',
+	            '8': 'tuv',
+	            '9': 'wxyz'
+	        }
+	        return reduce(lambda acc, digits: [x + y for x in acc for y in kvmaps[digits]], digits, [''])
