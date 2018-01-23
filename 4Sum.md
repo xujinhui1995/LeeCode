@@ -177,3 +177,52 @@ Given an array S of n integers, are there elements a, b, c and d in S such that 
 
 
 #### Rewrite Java From Python
+
+	class Solution {
+	    public List<List<Integer>> fourSum(int[] nums, int target) {
+	        LinkedList<List<Integer>> res = new LinkedList<List<Integer>>();
+	        Arrays.sort(nums);
+	        findNSum(nums, target, 4, new LinkedList<Integer>(), res);
+	        return res;
+	    }
+	    public void findNSum(int[] nums, int target, int N, LinkedList<Integer> list, List<List<Integer>> res){
+	        if(nums.length<N || N<2 || nums[0]*N>target || nums[nums.length-1]*N<target)
+	            return;
+	        int hi = nums.length-1, low = 0;
+	        if(N==2){
+	            while(low<hi){
+	                int sum = nums[low]+nums[hi];
+	                if(sum==target){
+	                	LinkedList<Integer> l = new LinkedList<Integer>();
+	                	for(Integer in: list){
+	                		l.add(in);
+	                	}
+	                    l.add(nums[low]);
+	                    l.add(nums[hi]);
+	                    res.add(l);
+	                    hi--;
+	                    low++;
+	                    while(low<hi && nums[hi]==nums[hi+1])
+	                        hi--;
+	                    while(low<hi && nums[low]==nums[low-1])
+	                        low++;
+	                }else if(sum<target){
+	                    low++;
+	                }else{
+	                    hi--;
+	                }
+	            }
+	        }else{
+	        	for(int i=0; i<nums.length-N+1; i++){
+	                if(i==0 || (i>0 && nums[i]!=nums[i-1])){
+	                	LinkedList<Integer> l = new LinkedList<Integer>();
+	                    for(Integer in: list){
+	                        l.add(in);
+	                    }
+	                    l.add(nums[i]);
+	                    findNSum(Arrays.copyOfRange(nums, i+1, nums.length), target-nums[i], N-1, l, res);
+	                }
+	            }
+	        }
+	    }
+	}
