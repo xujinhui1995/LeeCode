@@ -41,14 +41,6 @@ Given n pairs of parentheses, write a function to generate all combinations of w
 
 #### Java Discussion Solution :
 
-	/**
-	 * Definition for singly-linked list.
-	 * public class ListNode {
-	 *    int val;
-	 *    ListNode next;
-	 *    ListNode(int x) { val = x; }
-	 * }
-	 */
 	import java.util.*;
 	class Solution{
 	    public List<String> generateParenthesis(int n){
