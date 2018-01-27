@@ -38,3 +38,60 @@ Given n pairs of parentheses, write a function to generate all combinations of w
 	        return list;
 	    }
 	}
+
+#### Java Discussion Solution :
+
+	/**
+	 * Definition for singly-linked list.
+	 * public class ListNode {
+	 *    int val;
+	 *    ListNode next;
+	 *    ListNode(int x) { val = x; }
+	 * }
+	 */
+	import java.util.*;
+	class Solution{
+	    public List<String> generateParenthesis(int n){
+	        List<String> list = new LinkedList<String>();
+	        /**
+	         * The idea here is to only add '(' and ')' that we know will guarantee
+	         * us a solution (instead of adding 1 too many close).
+	         * Once we add a '(' we will then discard it and try a ')' which can only 
+	         * close a valid '('. Each of these steps are recursively called.
+	         */
+	        backtarck(list, "", 0, 0, n);
+	        return list;
+	    }
+	    public void backtarck(List<String>, String str, int open, int close, int max){
+	        if(str.length() == 2*max){
+	            list.add(str);
+	            return;
+	        }
+	        if(open<max){
+	            backtarck(list, str+"(", open+1, close, max);
+	        }
+	        if(close<open){
+	            backtarck(list, str+")", open, close+1, max);   
+	        }
+	    }
+	}
+
+#### Python Solution :
+
+	class Solution:
+	    def generateParenthesis(self, n):
+	        """
+	        :type n: int
+	        :rtype: List[str]
+	        """
+	        def backTrack(list, s, open, close, max):
+	            if len(s) == max*2:
+	                list.append(s)
+	                return;
+	            if open<max:
+	                backTrack(list, s+'(', open+1, close, max)
+	            if close<open:
+	                backTrack(list, s+')', open, close+1, max)
+	        list = []
+	        backTrack(list, '', 0, 0, n)
+	        return list
