@@ -117,3 +117,32 @@ merge k sorted linked lists and return it as one sorted list.Analyze and describ
 	            if tail.next:
 	                q.put(tail.next)
 	        return dummy.next;
+
+#### Python Discussion Solution :
+
+	# Definition for singly-linked list.
+	# class ListNode:
+	#     def __init__(self, x):
+	#         self.val = x
+	#         self.next = None
+	
+	from queue import PriorityQueue
+	class Solution:
+	    def mergeKLists(self, lists):
+	        """
+	        :type lists: List[ListNode]
+	        :rtype: ListNode
+	        """
+	        dummy = ListNode(None)
+	        curr = dummy
+	        k = len(lists)
+	        q = PriorityQueue(maxsize=k)
+	        for lst_index, node in enumerate(lists):
+	            if node: q.put((node.val, lst_index, node))
+	        while q.qsize()>0:
+	            poped = q.get()
+	            curr.next = poped[2]
+	            lst_index = poped[1]
+	            curr=curr.next
+	            if curr.next: q.put((curr.next.val, lst_index, curr.next))
+	        return dummy.next
