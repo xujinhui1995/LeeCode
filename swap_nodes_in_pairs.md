@@ -108,3 +108,58 @@ Your algorithm should use only constant space. You may not modify the values in 
 	        return tail;    
 	    }
 	}
+
+#### Python Solution :
+
+	# Definition for singly-linked list.
+	# class ListNode:
+	#     def __init__(self, x):
+	#         self.val = x
+	#         self.next = None
+	
+	class Solution:
+	    def swapPairs(self, head):
+	        """
+	        :type head: ListNode
+	        :rtype: ListNode
+	        """
+	        if not head or not head.next:
+	            return head
+	        dummy = ListNode(None)
+	        dummy.next = head
+	        tail = dummy
+	        nxt = head.next
+	        while head and nxt:
+	            dummy.next = nxt
+	            head.next = nxt.next
+	            nxt.next = head
+	            dummy = head
+	            head = head.next
+	            if head:
+	                nxt = head.next
+	            else:
+	                nxt = None
+	        return tail.next
+
+
+#### Python Discussion Solution :
+
+	# Definition for singly-linked list.
+	# class ListNode:
+	#     def __init__(self, x):
+	#         self.val = x
+	#         self.next = None
+	
+	class Solution:
+	    def swapPairs(self, head):
+	        """
+	        :type head: ListNode
+	        :rtype: ListNode
+	        """
+	        pre, pre.next = self, head
+	        while pre.next and pre.next.next:
+	            a = pre.next
+	            b = a.next
+	            pre.next, b.next, a.next = b, a, b.next
+	            pre = a
+	        return self.next
